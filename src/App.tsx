@@ -3,6 +3,7 @@ import FirestoreTest from "./FirestoreTest";
 import GoogleSignIn from "./GoogleSignIn";
 import Profile from "./Profile";
 import Browse from "./Browse";
+import Matches from "./Matches";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { auth } from "./firebase";
 import { onAuthStateChanged, User, signOut } from "firebase/auth";
@@ -33,6 +34,7 @@ const App: React.FC = () => {
               <p>Welcome, {user.displayName}!</p>
               <Link to="/profile">Profile</Link> | 
               <Link to="/browse">Browse Profiles</Link> | 
+              <Link to="/matches">My Matches</Link> | 
               <button onClick={handleLogout}>Logout</button>
             </>
           ) : (
@@ -44,6 +46,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<GoogleSignIn />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/browse" element={<Browse />} />
+          <Route path="/matches" element={<Matches />} />
         </Routes>
       </div>
     </Router>
