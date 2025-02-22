@@ -1,13 +1,22 @@
 import React from "react";
-import FirestoreTest from "./FirestoreTest"; // Import the Firestore test component
-import "./App.css"; // Keep existing CSS import
+import FirestoreTest from "./FirestoreTest";
+import GoogleSignIn from "./GoogleSignIn";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const App: React.FC = () => {
   return (
-    <div>
-      <h1>🔥 SkillXchange MVP</h1>
-      <FirestoreTest /> {/* Display Firestore test data */}
-    </div>
+    <Router>
+      <div>
+        <h1>🔥 SkillXchange MVP</h1>
+        <nav>
+          <Link to="/login">Sign In</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<FirestoreTest />} />
+          <Route path="/login" element={<GoogleSignIn />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
