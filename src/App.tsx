@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FirestoreTest from "./FirestoreTest";
 import GoogleSignIn from "./GoogleSignIn";
+import Profile from "./Profile";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { auth } from "./firebase";
 import { onAuthStateChanged, User, signOut } from "firebase/auth";
@@ -10,10 +11,10 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser); // 🔥 Set user if logged in, otherwise null
+      setUser(currentUser);
     });
 
-    return () => unsubscribe(); // Cleanup function to prevent memory leaks
+    return () => unsubscribe();
   }, []);
 
   const handleLogout = async () => {
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           {user ? (
             <>
               <p>Welcome, {user.displayName}!</p>
+              <Link to="/profile">Profile</Link> | 
               <button onClick={handleLogout}>Logout</button>
             </>
           ) : (
@@ -38,6 +40,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<FirestoreTest />} />
           <Route path="/login" element={<GoogleSignIn />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>
